@@ -59,9 +59,10 @@
       color: #fff;
     }
 
-    .hero p {
+    .hero .subheading {
       margin: 20px 0 30px;
-      font-size: 1.2rem; /* desktop size */
+      font-size: 1.2rem;
+      color: #fff;
     }
 
     .btn {
@@ -222,11 +223,10 @@
     }
 
     @media (max-width: 600px) {
-      .hero h1 { font-size: 1.8rem; margin-top: -200px; } /* moved 200px up */
-      .hero p { font-size: 1.2rem; margin-top: -180px; } /* adjusted with heading */
+      .hero h1 { font-size: 1.8rem; margin-top: -200px; }
+      .hero .subheading { font-size: 1.2rem; margin-top: -180px; }
     }
 
-    /* Ensure 'No' button never appears above the Yes buttons */
     #noBtn { z-index: 1; }
     .yes-buttons button { position: relative; z-index: 2; }
   </style>
@@ -237,7 +237,7 @@
   <div class="hero">
     <div>
       <h1>To My Forever Valentine, Megha 🌸</h1>
-      <p>No matter where life takes us, my heart will always find you.</p>
+      <p class="subheading">No matter where life takes us, my heart will always find you.</p>
     </div>
   </div>
 
