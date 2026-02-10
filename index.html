@@ -61,7 +61,7 @@
 
     .hero p {
       margin: 20px 0 30px;
-      font-size: 0.9rem; /* reduced by 1/4 from 1.2rem */
+      font-size: 1.2rem; /* desktop size */
     }
 
     .btn {
@@ -222,7 +222,8 @@
     }
 
     @media (max-width: 600px) {
-      .hero h1 { font-size: 1.8rem; }
+      .hero h1 { font-size: 1.8rem; margin-top: -200px; } /* moved 200px up */
+      .hero p { font-size: 1.8rem; } /* mobile-specific size */
     }
 
     /* Ensure 'No' button never appears above the Yes buttons */
