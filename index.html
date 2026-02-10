@@ -43,11 +43,10 @@
 
     /* HERO */
     .hero {
-      height: 100vh;
+      min-height: 100vh;
       background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)),
-        url('https://i.postimg.cc/9FM8MKSs/Megha-1.jpg');
+        url('https://i.postimg.cc/9FM8MKSs/Megha-1.jpg') no-repeat center center;
       background-size: cover;
-      background-position: center;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -56,7 +55,7 @@
     }
 
     .hero h1 {
-      font-size: 3rem; /* keep desktop size as original */
+      font-size: 3rem;
       color: #fff;
     }
 
@@ -233,6 +232,129 @@
 </head>
 <body>
 
-<!-- Rest of HTML remains unchanged -->
+  <!-- HERO -->
+  <div class="hero">
+    <div>
+      <h1>To My Forever Valentine, Megha ❤️</h1>
+      <p>No matter where life takes us, my heart will always find you.</p>
+    </div>
+  </div>
+
+  <!-- MEMORY LANE -->
+  <section id="memory">
+    <h2>Memory Lane</h2>
+    <p>Little moments, big feelings, endless memories.</p>
+
+    <div class="memory-grid">
+      <div class="memory"><img src="https://i.postimg.cc/YSjysVN6/Untitled_1.jpg" /><p>Our first smiles together😊🌸</p></div>
+      <div class="memory"><img src="https://i.postimg.cc/mrh65q3Q/Untitled_3.jpg" /><p>Us🥰🌸</p></div>
+      <div class="memory"><img src="https://i.postimg.cc/R0qbD81w/Untitled_2.jpg" /><p>Moments I’ll never forget😭🌸</p></div>
+    </div>
+  </section>
+
+  <!-- LOVE CARDS -->
+  <section>
+    <h2>Reasons Why I Love You</h2>
+
+    <div class="cards">
+      <div class="card"><div class="card-inner"><div class="card-face card-front">Your Smile</div><div class="card-face card-back">It makes my worst days better</div></div></div>
+      <div class="card"><div class="card-inner"><div class="card-face card-front">Your Heart</div><div class="card-face card-back">So pure, kind, and loving</div></div></div>
+      <div class="card"><div class="card-inner"><div class="card-face card-front">Your Presence</div><div class="card-face card-back">Home feels like you</div></div></div>
+      <div class="card"><div class="card-inner"><div class="card-face card-front">Us</div><div class="card-face card-back">Because we are magic together</div></div></div>
+    </div>
+  </section>
+
+  <!-- BIG QUESTION -->
+  <section class="question">
+    <h2>Will you be my Valentine? 💖</h2>
+    <div class="answers">
+      <button class="btn" onclick="sayYes()">Yes</button>
+      <button class="btn" onclick="sayYes()">Absolutely Yes</button>
+      <button class="btn" id="noBtn" onmouseover="runaway(this)" ontouchstart="runaway(this)">No</button>
+    </div>
+  </section>
+
+  <!-- FINAL NOTE -->
+  <section>
+    <h2>A Letter for You</h2>
+    <div class="letter">
+      Megha,
+      <br><br>
+      Happy Valentine's Day to the love of my life😘 my first love, my best friend, my cutu baby😘, my everything💗 You mean everything to me, and I feel so lucky to have you in my life. I promise I will always try my best to make you happy and stay beside you.
+      <br><br>
+      I pray that Allah blesses you, fulfills all your dreams, and gives you success in life. I will always love you and choose you, always. I Love You Putul💗😘😘
+      <br><br>
+      With all my love,💗😘<br>
+      Arnob
+    </div>
+  </section>
+
+  <canvas class="confetti" id="confetti"></canvas>
+
+  <!-- Romantic Music -->
+  <audio id="loveMusic" src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_7b6b9f0b7c.mp3" preload="auto"></audio>
+
+  <script>
+    const memories = document.querySelectorAll('.memory');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('show');
+      });
+    }, { threshold: 0.3 });
+
+    memories.forEach(m => observer.observe(m));
+
+    function runaway(btn) {
+      const x = Math.random() * 200 - 100;
+      const y = Math.random() * 200 - 100;
+      btn.style.transform = `translate(${x}px, ${y}px)`;
+    }
+
+    function sayYes() {
+      const music = document.getElementById('loveMusic');
+      music.muted = false;
+      music.volume = 1;
+      music.currentTime = 0;
+      music.play().catch(() => console.log('Autoplay prevented'));
+      launchConfetti();
+      setTimeout(() => music.pause(), 5000);
+    }
+
+    function launchConfetti() {
+      const canvas = document.getElementById('confetti');
+      canvas.style.display = 'block';
+      const ctx = canvas.getContext('2d');
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+
+      const pieces = Array.from({ length: 150 }, () => ({ x: Math.random()*canvas.width, y: Math.random()*canvas.height, r: Math.random()*6+4, d: Math.random()*10+5 }));
+      let animationId;
+      function draw() {
+        ctx.clearRect(0,0,canvas.width,canvas.height);
+        ctx.fillStyle = '#ff6f91';
+        pieces.forEach(p => {
+          ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2); ctx.fill(); p.y+=p.d; if(p.y>canvas.height)p.y=0;
+        });
+        animationId = requestAnimationFrame(draw);
+      }
+      draw();
+
+      setTimeout(() => {
+        canvas.style.opacity='0';
+        setTimeout(()=>{cancelAnimationFrame(animationId);ctx.clearRect(0,0,canvas.width,canvas.height);canvas.style.display='none';canvas.style.opacity='1';},1200);
+      },5000);
+    }
+
+    const heartInterval = setInterval(()=>{
+      const heart = document.createElement('div');
+      heart.className='heart';
+      heart.style.left=Math.random()*100+'vw';
+      heart.textContent='🌸';
+      document.body.appendChild(heart);
+      setTimeout(()=>heart.remove(),6000);
+    },700);
+    setTimeout(()=>clearInterval(heartInterval),5000);
+  </script>
+
 </body>
 </html>
